@@ -1,0 +1,98 @@
+<html lang='en'>
+<head>
+  <meta content='text/html; charset=UTF-8' http-equiv='Content-Type'>
+  <meta charset='utf-8'>
+  <meta content='width=device-width' name='viewport'>
+  <meta content='noindex' name='robots'>
+  <title>music dump</title>
+  <link href='journal.css' rel='stylesheet' type='text/css'>
+</head>
+<body class='body'>
+  <script src="jquery.js"></script>
+  <div class='wrapper'>
+   
+
+    <main>
+      <div class='post'>
+<p>dragonbound trailer was updated today.</p>
+<p>piano doodles of the intro theme i heard.</p>
+
+
+<div style="text-align:left;" class='music really-player-container'>
+  <div class='really-player'>
+    <button aria-label='Play' class='play-button'></button>
+    <img aria-hidden='true' class='volume-icon' src='assets/images/volume.png'>
+    <input aria-label='Volume' class='volume' max='100' min='0' type='range' value='50'>
+    <audio loop volume='0.5'>
+      <source src='piano.mp3' type='audio/mp3'>
+    </audio>
+  </div>
+</div>
+
+<p>aaaawwlkkddgame.mp3</p>
+
+
+
+<div class='post-footer'>
+<div class='mood'>
+<strong>Mood:</strong>
+<span>Creative</span>
+</div>
+<div class='listening-to'>
+<strong>Listening to:</strong>
+<span>Hometown Hollies [Radio Mix]</span>
+</div>
+</div>
+<div class='comments-footer'>
+<a class='disabled' href='#' title='Comments Disabled'>(leave a comment)</a>
+</div>
+</div>
+
+    </main>
+
+  </div>
+
+  
+  <script>
+$(document).on('click', '.really-player:not(.playing) .play-button', function() {
+  console.log("dsfdsfds")
+  var reallyplayer = $(this).closest('.really-player');
+  var players = reallyplayer.find('audio');
+  var playerToPlay = Math.floor( Math.random() * ( 1 + players.length - 1 ) );
+  players[playerToPlay].play();
+});
+
+$(document).on('click', '.really-player.playing .play-button', function() {
+  var reallyplayer = $(this).closest('.really-player');
+  var players = reallyplayer.find('audio');
+  players.each(function() {
+    $(this)[0].pause();
+  });
+});
+
+$(document).on('input change', '.really-player .volume', function() {
+  var reallyplayer = $(this).closest('.really-player');
+  var newvolume = $(this).volume = $(this).val() / 100.0;
+  var players = reallyplayer.find('audio');
+  players.each(function() {
+    $(this)[0].volume = newvolume;
+  });
+});
+
+$('.really-player audio').each(function() {
+  $(this)[0].addEventListener('play', function() {
+    $('.really-player.playing').each(function() {
+      $(this).find('audio')[0].pause();
+    });
+    $(this).closest('.really-player').addClass('playing');
+    $(this).closest('.really-player-container').addClass('playing');
+  });
+  $(this)[0].addEventListener('pause', function() {
+    $(this).closest('.really-player').removeClass('playing');
+    $(this).closest('.really-player-container').removeClass('playing');
+  });
+});
+  </script>
+  
+</body>
+</html>
